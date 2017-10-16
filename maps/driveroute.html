@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <title>#AccessibleOllie Route Drive</title>
+
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.41.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.41.0/mapbox-gl.css' rel='stylesheet' />
+
+    <style>
+      body { margin:0; padding:0; }
+      #map { position:absolute; top:0; bottom:0; width:100%; }
+      .btn-control {
+        background-color: #3386c0;
+        border: medium none;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        font:bold 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        margin: 10px;
+        padding: 10px 20px;
+        position: relative;
+        text-align: center;
+        width: 200px;
+        z-index: 1;
+      }
+      .btn-control:hover {
+        background-color: #4ea0da;
+      }
+      .fileUpload {
+        position: relative;
+      }
+      #kmlFile {
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        bottom: 0;
+        right: 0;
+      }
+      .hide {
+        display: none;
+      }
+    </style>
+
+    <script src="driveroute.js"></script>
+  </head>
+
+  <body>
+    <div id='map'></div>
+    <form id="pageForm" class="col s12">
+      <div class="fileUpload btn-control">
+          <span>Upload KML File</span>
+          <input id="kmlFile" type="file" />
+      </div>
+      <button id='showRoute' type="button" class='btn-control hide'>Show Route</nav>
+      <button id='driveRoute' type="button" class='btn-control hide'>Drive Route</nav>
+    </form>
+  </body>
+
+</html>
