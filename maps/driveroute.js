@@ -9,9 +9,9 @@ let showRouteButton = null
 let driveRouteButton = null
 
 /**
- * Animates the Ollie bus moving along the give route
+ * Animates moving along the given route
  *
- * @param {Object} geojson - object defining the route
+ * @param {Object} geojson - GeoJSON object defining the route
  */
 const initDriveRoute = (geojson) => {
   if (map) {
@@ -80,7 +80,7 @@ const initDriveRoute = (geojson) => {
 /**
  * Toggles the visibility of the route
  *
- * @param {Object} geojson - object defining the route
+ * @param {Object} geojson - GeoJSON object defining the route
  * @param {boolean} animate - if true, animate the showing of the route
  */
 const initShowRoute = (geojson, animate) => {
@@ -181,7 +181,7 @@ const initMap = () => {
 /**
  * Zoom the map to fit the given coordinates
  *
- * @param {Object} geojson - object defining the area to zoom in to
+ * @param {Object} geojson - GeoJSON object defining the area to zoom in to
  */
 const zoomToFit = (geojson) => {
   if (map) {
