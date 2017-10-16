@@ -46,7 +46,7 @@ const initDriveRoute = (geojson) => {
       },
       'type': 'symbol',
       'layout': {
-        'icon-image': 'bus-15'
+        'icon-image': 'ollie'
       }
     })
 
@@ -175,6 +175,14 @@ const initMap = () => {
     style: 'mapbox://styles/mapbox/streets-v9',
     center: [-97.380979, 42.877742],
     zoom: 4
+  })
+
+  map.loadImage('ollie-15x19.png', (error, image) => {
+    if (error) {
+      throw error
+    } else {
+      map.addImage('ollie', image)
+    }
   })
 }
 
