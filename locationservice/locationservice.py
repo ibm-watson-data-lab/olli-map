@@ -13,10 +13,10 @@ def readfiles():
       segments.append(geoj)
 
 def sendLocation(feature):
-  print "Sending location..."+str(feature)
   feature["properties"]["ts"] = int(round(time.time() * 1000))
+  print "Sending location..."+str(feature)
   requests.post(dburi, json=feature)
-  time.sleep(0.5) # send a point every second
+  time.sleep(1) # send a point every second
 
 
 # delete database and re-create
