@@ -1,7 +1,9 @@
 import os, json, time, requests
 
 segments = []
-fileNames = ['./segments/route3a.json', './segments/route3b.json', './segments/route3c.json']
+# order is important in these file names
+# this is the order in which they will "play back"
+fileNames = ['./segments/route3a.json', './segments/route3b.json', './segments/route3c.json', './segments/route3d.json', './segments/route3e.json']
 dburi = os.environ['CLOUDANT_URL']
 print(dburi)
 
