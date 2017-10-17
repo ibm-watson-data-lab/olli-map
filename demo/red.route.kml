@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml 
+	xmlns="http://www.opengis.net/kml/2.2" 
+	xmlns:gx="http://www.google.com/kml/ext/2.2" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/kml/2.2 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd http://www.google.com/kml/ext/2.2 http://code.google.com/apis/kml/schema/kml22gx.xsd">
+	<Document id="RedRoute">
+		<name>RedRoute</name>
+		<Snippet></Snippet>
+		<Style id="LineStyle00">
+			<LabelStyle>
+				<color>00000000</color>
+				<scale>0</scale>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff00ff00</color>
+				<width>2.4</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>00000000</color>
+				<outline>0</outline>
+			</PolyStyle>
+		</Style>
+		<StyleMap id="LineStyle000">
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#LineStyle001</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#LineStyle00</styleUrl>
+			</Pair>
+		</StyleMap>
+		<Style id="LineStyle001">
+			<LabelStyle>
+				<color>00000000</color>
+				<scale>0</scale>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff00ff00</color>
+				<width>2.4</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>00000000</color>
+				<outline>0</outline>
+			</PolyStyle>
+		</Style>
+		<Folder id="FeatureLayer0">
+			<name>"RedRoute"</name>
+			<Snippet></Snippet>
+			<Placemark id="ID_00000">
+				<name>0</name>
+				<Snippet></Snippet>
+				<styleUrl>#LineStyle00</styleUrl>
+				<MultiGeometry>
+					<LineString>
+						<extrude>0</extrude>
+						<altitudeMode>clampToGround</altitudeMode>
+						<coordinates>-92.467044,44.022365,0,-92.467039,44.022377,0,-92.467039,44.022533,0,-92.467046,44.022574,0,-92.467074,44.022612,0,-92.467131,44.022635,0,-92.467219,44.022674,0,-92.467227,44.022677,0,-92.46727,44.022705,0,-92.467305,44.022736,0,-92.467328,44.02277,0,-92.467357,44.022832,0,-92.467365,44.023382,0,-92.467366,44.023495,0,-92.467206,44.023494,0,-92.465934,44.023491,0,-92.465807,44.023491,0,-92.464669,44.02349,0,-92.46453,44.02349,0,-92.464526,44.02337,0,-92.46452,44.023069,0,-92.464518,44.022776,0,-92.464521,44.022527,0,-92.464521,44.02252,0,-92.464518,44.02172,0,-92.464518,44.021597,0,-92.464516,44.021468,0,-92.464504,44.020502,0,-92.464503,44.020449,0,-92.464504,44.020552,0,-92.464524,44.019417,0,-92.464526,44.01932,0,-92.464656,44.019319,0,-92.46523,44.019316,0,-92.465816,44.019313,0,-92.465908,44.019312,0,-92.466066,44.019314,0,-92.466684,44.019319,0,-92.467351,44.019318,0,-92.46735,44.019515,0,-92.467347,44.020367,0,-92.467347,44.020446,0,-92.467347,44.020512,0,-92.467347,44.020764,0,-92.467348,44.021476,0,-92.467348,44.021597,0,-92.467349,44.021708,0,-92.46735,44.022191,0,-92.467317,44.022224,0,-92.467263,44.022256,0,-92.467224,44.022269,0,-92.467198,44.022277,0,-92.467123,44.022292,0,-92.46708,44.022315,0,-92.467054,44.022341,0,-92.467044,44.022365</coordinates>
+					</LineString>
+				</MultiGeometry>
+			</Placemark>
+		</Folder>
+		<Style id="LineStyle00">
+			<LabelStyle>
+				<color>00000000</color>
+				<scale>0.000000</scale>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff00369c</color>
+				<width>1.000000</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>00000000</color>
+				<outline>0</outline>
+			</PolyStyle>
+		</Style>
+	</Document>
+</kml>
