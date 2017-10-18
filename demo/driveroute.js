@@ -89,7 +89,8 @@ const initDriveRoute = (geojson, stops) => {
       },
       'type': 'symbol',
       'layout': {
-        'icon-image': 'ollie'
+        'icon-image': 'ollie', 
+        'icon-size': 0.75
       }
     })
 
@@ -181,7 +182,7 @@ const initShowRoute = (geojson, animate) => {
       'paint': {
         'line-color': '#888888',
         'line-width': 8,
-        'line-opacity': 0.8
+        'line-opacity': 0.6
       }
     })
 
@@ -245,6 +246,7 @@ const addStops = (stops) => {
       },
       'layout': {
         'icon-image': 'ollie-stop',
+        'icon-size': 0.25, 
         'text-field': '{title}',
         'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
         'text-offset': [0, 1.4],
@@ -283,7 +285,7 @@ const initMap = () => {
     zoom: 4
   })
 
-  map.loadImage('Olli_icon_ai.png', (error, image) => {
+  map.loadImage('olli-icon-svg.png', (error, image) => {
     if (error) {
       throw error
     } else {
