@@ -245,8 +245,8 @@ const addStops = (stops) => {
       },
       'layout': {
         'icon-image': 'olli-stop',
-        'icon-size': 0.25, 
-        'text-field': '{title}',
+        'icon-size': 0.25,
+        'text-field': '{name}',
         'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
         'text-offset': [0, 1.4],
         'text-anchor': 'top'
