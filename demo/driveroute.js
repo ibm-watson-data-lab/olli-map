@@ -179,8 +179,8 @@ const initShowRoute = (geojson, animate) => {
         'line-join': 'round'
       },
       'paint': {
-        'line-color': '#ed6498',
-        'line-width': 5,
+        'line-color': '#888888',
+        'line-width': 8,
         'line-opacity': 0.8
       }
     })
@@ -244,10 +244,10 @@ const addStops = (stops) => {
         'data': stops
       },
       'layout': {
-        'icon-image': '{icon}',
+        'icon-image': 'ollie-stop',
         'text-field': '{title}',
         'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
-        'text-offset': [0, 0.6],
+        'text-offset': [0, 1.4],
         'text-anchor': 'top'
       }
     })
@@ -283,11 +283,18 @@ const initMap = () => {
     zoom: 4
   })
 
-  map.loadImage('ollie-15x19.png', (error, image) => {
+  map.loadImage('Olli_icon_ai.png', (error, image) => {
     if (error) {
       throw error
     } else {
       map.addImage('ollie', image)
+    }
+  })
+  map.loadImage('olli-stop.png', (error, image) => {
+    if (error) {
+      throw error
+    } else {
+      map.addImage('ollie-stop', image)
     }
   })
 }
@@ -435,8 +442,8 @@ const processKML = (kmldata, stops) => {
   if (map) {
     zoomToFit(geojson)
     map.once('zoomend', () => {
-      addStops(stops)
       initShowRoute(geojson)
+      addStops(stops)
       initDriveRoute(geojson, stops)
     })
   }
