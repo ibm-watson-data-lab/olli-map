@@ -11,33 +11,33 @@ def readfiles():
   for fi in fileNames: 
     with open(fi) as stuff:
       geoj = json.load(stuff)
-      # print geoj["features"][0]["properties"]
+      # print geoj['features'][0]['properties']
       segments.append(geoj)
 
 def sendLocation(feature):
-  feature["properties"]["ts"] = int(round(time.time() * 1000))
-  print "Sending location..."+str(feature)
+  feature['properties']['ts'] = int(round(time.time() * 1000))
+  print 'Sending location...' + str(feature)
   requests.post(dburi, json=feature)
-  time.sleep(1) # send a point every second
 
 
 # delete database and re-create
-print "Deleting database..."
+print 'Deleting database...'
 r = requests.delete(dburi)
 print r.status_code
 
 r = requests.put(dburi)
 print r.status_code
 if r.status_code == 201: 
-  print "Database created successfully"
+  print 'Database created successfully'
 
 readfiles()
 
 counter = 0
 while counter < 100: 
   for segment in segments:
-    features = segment["features"]
+    features = segment['features']
     for feature in features:
       sendLocation(feature)
+      # time.sleep(1) # send a point every second
     time.sleep(5)
     counter = counter + 1
