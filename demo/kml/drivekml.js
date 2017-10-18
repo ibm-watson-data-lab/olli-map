@@ -32,7 +32,7 @@ const toDegrees = (radians) => {
 }
 
 /**
- * Computes the full path (all point in between) for the given GeoJSON 
+ * Computes the full path (all point in between) for the given GeoJSON
  *
  * @param {Object} geojson - the GeoJSON to compute path
  * @returns {Object} GeoJSON object representing the full path
@@ -46,7 +46,6 @@ const computeAnimationPath = (geojson) => {
 
     path = path.concat(pointsBetween)
     path.push(coordinates[i + 1])
-    console.log(path[path.length - 1])
   }
   return path
 }
@@ -62,15 +61,15 @@ const initDriveRoute = (geojson, stops) => {
     let counter = 0
 
     if (driveRouteButton) {
-      map.removeLayer('ollie-bus')
-      map.removeSource('ollie-bus')
+      map.removeLayer('olli-bus')
+      map.removeSource('olli-bus')
     }
 
     geojson.features[0].geometry.coordinates = computeAnimationPath(geojson)
 
-    // a point representing the Ollie bus
+    // a point representing the olli bus
     // coordinates initially set to starting coordinate
-    let olliebus = {
+    let ollibus = {
       'type': 'FeatureCollection',
       'features': [{
         'type': 'Feature',
@@ -82,14 +81,14 @@ const initDriveRoute = (geojson, stops) => {
     }
 
     map.addLayer({
-      'id': 'ollie-bus',
+      'id': 'olli-bus',
       'source': {
         'type': 'geojson',
-        'data': olliebus
+        'data': ollibus
       },
       'type': 'symbol',
       'layout': {
-        'icon-image': 'ollie', 
+        'icon-image': 'olli',
         'icon-size': 0.75
       }
     })
@@ -103,17 +102,17 @@ const initDriveRoute = (geojson, stops) => {
       }
 
       // update bus coordinate to a new position
-      olliebus.features[0].geometry.coordinates = geojson.features[0].geometry.coordinates[counter]
-
+      ollibus.features[0].geometry.coordinates = geojson.features[0].geometry.coordinates[counter]
       // update source with this new data.
-      map.getSource('ollie-bus').setData(olliebus)
+      map.getSource('olli-bus').setData(ollibus)
 
       counter = counter + 1
 
       // request next frame of animation (if destination has not been reached)
       if (counter < geojson.features[0].geometry.coordinates.length) {
-        let current = olliebus.features[0].geometry.coordinates
-        const atStop = counter > 0 && stopCoordinates.some(stop => {
+        let current = ollibus.features[0].geometry.coordinates
+
+        const atStop = counter > 3 && stopCoordinates.some(stop => {
           return stop[0] === current[0] && stop[1] === current[1]
         })
         if (atStop && counter > 1) {
@@ -153,8 +152,8 @@ const initShowRoute = (geojson, animate) => {
     })
 
     if (showRouteButton) {
-      map.removeLayer('ollie-route')
-      map.removeSource('ollie-route')
+      map.removeLayer('olli-route')
+      map.removeSource('olli-route')
     }
 
     let route = {
@@ -169,7 +168,7 @@ const initShowRoute = (geojson, animate) => {
     }
 
     map.addLayer({
-      'id': 'ollie-route',
+      'id': 'olli-route',
       'type': 'line',
       'source': {
         'type': 'geojson',
@@ -191,7 +190,7 @@ const initShowRoute = (geojson, animate) => {
         if (coordinates[pointsAdded] && coordinates[pointsAdded].length > 1) {
           route.features[0].geometry.coordinates.push(coordinates[pointsAdded])
           // then update the map
-          map.getSource('ollie-route').setData(route)
+          map.getSource('olli-route').setData(route)
         }
 
         window.setTimeout(addPoint, 100)
@@ -201,20 +200,20 @@ const initShowRoute = (geojson, animate) => {
     if (!showRouteButton) {
       showRouteButton = document.getElementById('showRoute')
       showRouteButton.addEventListener('click', () => {
-        const visibility = map.getLayoutProperty('ollie-route', 'visibility')
+        const visibility = map.getLayoutProperty('olli-route', 'visibility')
 
         if (visibility === 'visible') {
-          map.setLayoutProperty('ollie-route', 'visibility', 'none')
+          map.setLayoutProperty('olli-route', 'visibility', 'none')
           showRouteButton.innerText = 'Show Route'
         } else if (animate) {
           pointsAdded = 0
           route.features[0].geometry.coordinates = [coordinates[pointsAdded]]
-          map.setLayoutProperty('ollie-route', 'visibility', 'visible')
+          map.setLayoutProperty('olli-route', 'visibility', 'visible')
           addPoint()
           showRouteButton.innerText = 'Hide Route'
         } else {
-          map.getSource('ollie-route').setData(geojson)
-          map.setLayoutProperty('ollie-route', 'visibility', 'visible')
+          map.getSource('olli-route').setData(geojson)
+          map.setLayoutProperty('olli-route', 'visibility', 'visible')
           showRouteButton.innerText = 'Hide Route'
         }
       })
@@ -233,19 +232,19 @@ const initShowRoute = (geojson, animate) => {
 const addStops = (stops) => {
   if (map) {
     if (hideStopsButton) {
-      map.removeLayer('ollie-stops')
-      map.removeSource('ollie-stops')
+      map.removeLayer('olli-stops')
+      map.removeSource('olli-stops')
     }
 
     map.addLayer({
-      'id': 'ollie-stops',
+      'id': 'olli-stops',
       'type': 'symbol',
       'source': {
         'type': 'geojson',
         'data': stops
       },
       'layout': {
-        'icon-image': 'ollie-stop',
+        'icon-image': 'olli-stop',
         'icon-size': 0.25, 
         'text-field': '{title}',
         'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
@@ -257,12 +256,12 @@ const addStops = (stops) => {
     if (!hideStopsButton) {
       hideStopsButton = document.getElementById('hideStops')
       hideStopsButton.addEventListener('click', () => {
-        const visibility = map.getLayoutProperty('ollie-stops', 'visibility')
+        const visibility = map.getLayoutProperty('olli-stops', 'visibility')
         if (visibility === 'visible') {
-          map.setLayoutProperty('ollie-stops', 'visibility', 'none')
+          map.setLayoutProperty('olli-stops', 'visibility', 'none')
           hideStopsButton.innerText = 'Show Stops'
         } else {
-          map.setLayoutProperty('ollie-stops', 'visibility', 'visible')
+          map.setLayoutProperty('olli-stops', 'visibility', 'visible')
           hideStopsButton.innerText = 'Hide Stops'
         }
       })
@@ -270,7 +269,7 @@ const addStops = (stops) => {
 
     hideStopsButton.style.display = 'inline-block'
     hideStopsButton.innerText = 'Hide Stops'
-    map.setLayoutProperty('ollie-stops', 'visibility', 'visible')
+    map.setLayoutProperty('olli-stops', 'visibility', 'visible')
   }
 }
 
@@ -285,18 +284,18 @@ const initMap = () => {
     zoom: 4
   })
 
-  map.loadImage('olli-icon-svg.png', (error, image) => {
+  map.loadImage('../olli-icon-svg.png', (error, image) => {
     if (error) {
       throw error
     } else {
-      map.addImage('ollie', image)
+      map.addImage('olli', image)
     }
   })
-  map.loadImage('olli-stop.png', (error, image) => {
+  map.loadImage('../olli-stop.png', (error, image) => {
     if (error) {
       throw error
     } else {
-      map.addImage('ollie-stop', image)
+      map.addImage('olli-stop', image)
     }
   })
 }
@@ -445,19 +444,34 @@ const processKML = (kmldata, stops) => {
     zoomToFit(geojson)
     map.once('zoomend', () => {
       initShowRoute(geojson)
-      addStops(stops)
-      initDriveRoute(geojson, stops)
+      getOlliStops()
+        .then((stops) => {
+          initDriveRoute(geojson, stops)
+        })
     })
   }
 }
 
-const getDefaultKML = (stops) => {
+const getDefaultKML = () => {
   let xmlhttp = new XMLHttpRequest()
   xmlhttp.addEventListener('load', function () {
-    processKML(this.response, stops)
+    processKML(this.response)
   }, false)
   xmlhttp.open('GET', 'red.route.kml', true)
   xmlhttp.send()
+}
+
+const getOlliStops = (callback) => {
+  return new Promise((resolve, reject) => {
+    let xmlhttp = new XMLHttpRequest()
+    xmlhttp.addEventListener('load', function () {
+      let stops = JSON.parse(this.response)
+      addStops(stops)
+      resolve(stops)
+    }, false)
+    xmlhttp.open('GET', '/data/stops.json', true)
+    xmlhttp.send()
+  })
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -466,7 +480,7 @@ document.addEventListener('DOMContentLoaded', function () {
   initMap()
 
   if (window.location.search.indexOf('upload=true') === -1) {
-    getDefaultKML(window.olliestops)
+    getDefaultKML(window.ollistops)
   } else {
     document.getElementById('fileUpload').style.display = 'inline-block'
     var fileInput = document.getElementById('kmlFile')
