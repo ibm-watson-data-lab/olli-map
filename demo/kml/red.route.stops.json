@@ -1,0 +1,65 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mayo Gonda Building", 
+        "description": "Mayo Clinic main patient building", 
+        "poi": ["Mayo Clinic specialties (cardiology, gastroenterology, neurology, etc.","May Clinic Gift Shop","Mayo Clinic Center for Innovation","Gonda Building Atrium"]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.467044, 44.022365]
+     }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Peace Plaza", 
+        "description": "Social events, shops all around, music, Thursdays on First and Third", 
+        "poi": ["Chateau Theater (closed)","Lasker's Jewelers", "Victoria's Restaurant","Galleria Mall","O&B Shoes","Marriott Hotel","Gateway to Heart of the City"]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.464521, 44.022520]
+     }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Historic 3rd Street and 1st Ave Restaurant District",
+        "description": "Food and boutique shops, antiques, artwork", 
+        "poi": ["The Doggery", "The Tap House", "Half Barrel Pub", "Artistic Framers","John Kruesel's General Merchandise","Minnesota BioBusiness Center","The Loop"]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.464504, 44.020552]
+     }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Future site of Discovery Square",
+        "description": "First Destination Medical Center building for the Discover Square District", 
+        "poi": ["Parking","Mortenson building"]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.466684, 44.019319]
+     }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mayo Guggenheim Building", 
+        "description": "Mayo Clinic research laboratories", 
+        "poi": ["Mayo Clinic research laboratories", "Mayo Medical School", "Mayo Clinic Hilton building", "Mayo Clinic Stabile building"]
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-92.467347, 44.020764]
+     }
+    }
+  ]
+}

@@ -469,7 +469,7 @@ const getOlliStops = (callback) => {
       addStops(stops)
       resolve(stops)
     }, false)
-    xmlhttp.open('GET', '/data/stops.json', true)
+    xmlhttp.open('GET', 'red.route.stops.json', true)
     xmlhttp.send()
   })
 }

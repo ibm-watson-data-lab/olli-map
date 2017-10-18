@@ -87,7 +87,7 @@ const initRoute = (coordinates) => {
       'id': 'olli-route',
       'type': 'line',
       'properties': {
-        'visibility': 'visible'
+        'visibility': 'none'
       },
       'source': {
         'type': 'geojson',
@@ -98,9 +98,9 @@ const initRoute = (coordinates) => {
         'line-join': 'round'
       },
       'paint': {
-        'line-color': '#ed6498',
-        'line-width': 5,
-        'line-opacity': 0.8
+        'line-color': '#888888',
+        'line-width': 8,
+        'line-opacity': 0.6
       }
     })
 
@@ -116,6 +116,9 @@ const initRoute = (coordinates) => {
         hideRouteButton.innerText = 'Hide Route'
       }
     })
+
+    map.setLayoutProperty('olli-route', 'visibility', 'none')
+    hideRouteButton.innerText = 'Show Route'
   }
 }
 
