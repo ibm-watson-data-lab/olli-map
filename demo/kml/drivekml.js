@@ -38,16 +38,27 @@ const toDegrees = (radians) => {
  * @returns {Object} GeoJSON object representing the full path
  */
 const computeAnimationPath = (geojson) => {
+  const earthRadiusKm = 6371.0088
   let coordinates = geojson.features[0].geometry.coordinates
-  let path = [coordinates[0]]
-  for (let i = 0; i < coordinates.length - 1; i++) {
-    let steps = turf.distance(turf.point(coordinates[i]), turf.point(coordinates[i + 1]), 'kilometers') * (3000 / (ANIMATION_SPEED || 1))
-    let pointsBetween = getPointsBetween(coordinates[i], coordinates[i + 1], steps)
 
-    path = path.concat(pointsBetween)
-    path.push(coordinates[i + 1])
+  let ollipath = [coordinates[0]]
+  let current = null
+  let next = null
+  let steps = null
+  let pointsBetween = null
+
+  for (let i = 0; i < coordinates.length - 1; i++) {
+    current = coordinates[i]
+    next = coordinates[i + 1]
+
+    steps = computeDistance(current, next) * earthRadiusKm * (3000 / (ANIMATION_SPEED || 1))
+    pointsBetween = getPointsBetween(current, next, steps)
+
+    ollipath = ollipath.concat(pointsBetween)
+    ollipath.push(coordinates[i + 1])
   }
-  return path
+
+  return ollipath
 }
 
 /**
@@ -403,6 +414,34 @@ const readFile = function (file) {
   })
 }
 
+/**
+ * Compute distance (in radians) between two coordinates
+ *
+ * @param {Array} from - coordinate of the start point
+ * @param {Array} to - coordinate of the end point
+ */
+const computeDistance = (from, to) => {
+  const lat1 = toRadians(from[1])
+  const lat2 = toRadians(to[1])
+  const deltaLat = toRadians(to[1] - from[1])
+  const deltaLon = toRadians(to[0] - from[0])
+
+  let a = Math.pow(Math.sin(deltaLat / 2), 2) +
+        Math.pow(Math.sin(deltaLon / 2), 2) * Math.cos(lat1) * Math.cos(lat2)
+
+  return (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)))
+}
+
+/**
+ * JavaScript version of the `pointsBetween` method found here:
+ *
+ *   https://github.com/cammace/mapbox-utils-android/blob/master/lib/src/main/java/com/mapbox/utils/MathUtil.java#L70
+ *
+ * @param {Array} from - the coordinates of the start point (i.e., [<lng>, <lat>])
+ * @param {Array} to - the coordinates of the end point (i.e., [<lng>, <lat>])
+ * @param {number} steps - number of points between start and end to compute
+ * @returns {Array} array of the coordinates of the computed points
+ */
 const getPointsBetween = (from, to, steps) => {
   let pointsBetween = []
 
@@ -417,11 +456,7 @@ const getPointsBetween = (from, to, steps) => {
 
       let f = i * (1 / steps)
 
-      let deltaLat = (lat2 - lat1)
-      let deltaLon = (lon2 - lon1)
-
-      let m = Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) + Math.cos(lat1) * Math.cos(lat2) * Math.sin(deltaLon / 2) * Math.sin(deltaLon / 2)
-      let distance = 2 * Math.atan2(Math.sqrt(m), Math.sqrt(1 - m))
+      let distance = computeDistance(from, to)
 
       let a = Math.sin((1 - f) * distance) / Math.sin(distance)
       let b = Math.sin(f * distance) / Math.sin(distance)
