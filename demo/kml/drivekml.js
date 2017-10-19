@@ -1,4 +1,4 @@
-/* global mapboxgl, turf, requestAnimationFrame, FileReader, XMLHttpRequest */
+/* global mapboxgl, requestAnimationFrame, FileReader, XMLHttpRequest */
 
 mapboxgl.accessToken = 'pk.eyJ1IjoicmFqcnNpbmdoIiwiYSI6ImpzeDhXbk0ifQ.VeSXCxcobmgfLgJAnsK3nw'
 
