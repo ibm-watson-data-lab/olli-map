@@ -124,7 +124,7 @@ const initRoute = (coordinates) => {
 
 const updateOlliLocation = (olliLocation) => {
   // update bus coordinate to a new position
-  ollibus.features[0].geometry.coordinates = olliLocation.geometry.coordinates
+  ollibus.features[0].geometry.coordinates = olliLocation
 
   // update the route travelled
   if (started) {
@@ -208,7 +208,11 @@ const sync = () => {
       // incoming changes only
       if (info.direction === 'pull' && info.change && info.change.docs) {
         // console.log('sync.on.change', info.change.docs)
-        updateOlliLocation(info.change.docs[info.change.docs.length - 1])
+        info.change.docs.forEach(function (doc) {
+          if (doc.type === 'geo_position') {
+            updateOlliLocation(doc.coordinates)
+          }
+        })
       }
     })
     .on('error', err => {
