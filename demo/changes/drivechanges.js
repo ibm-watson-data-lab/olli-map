@@ -214,6 +214,8 @@ const sync = () => {
         info.change.docs.forEach(function (doc) {
           if (doc.type === 'geo_position') {
             updateOlliLocation(doc.coordinates)
+          } else {
+            console.log(doc.type, 'event received')
           }
         })
       }
