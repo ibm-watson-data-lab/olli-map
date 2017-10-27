@@ -1,6 +1,3 @@
-// 20171026144541
-// https://files.slack.com/files-pri/T27SFGS2W-F7QJ677GC/stops2.json
-
 {
   "type": "FeatureCollection",
   "features": [
@@ -27,10 +24,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -92.467148454828,
-          44.022351687354
-        ]
+        "coordinates": [-92.467148454828, 44.022351687354]
       }
     },
     {
@@ -56,10 +50,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -92.464548669579,
-          44.022475156222
-        ]
+        "coordinates": [-92.464548669579, 44.022475156222]
       }
     },
     {
@@ -93,10 +84,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -92.464536948532,
-          44.020596506866
-        ]
+        "coordinates": [-92.464536948532, 44.020596506866]
       }
     },
     {
@@ -117,10 +105,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -92.466721277482,
-          44.019369728467
-        ]
+        "coordinates": [-92.466721277482, 44.019369728467]
       }
     },
     {
@@ -149,10 +134,7 @@
       },
       "geometry": {
         "type": "Point",
-        "coordinates": [
-          -92.467330873686,
-          44.020779972144
-        ]
+        "coordinates": [-92.467330873686, 44.020779972144]
       }
     }
   ]

@@ -3,6 +3,8 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoicmFqcnNpbmdoIiwiYSI6ImpzeDhXbk0ifQ.VeSXCxcobmgfLgJAnsK3nw'
 
 const DB_NAME = 'ollilocation'
+
+const STOPS = '/demo/kml/route.stops.2.json' // '/data/stops.json'
 const REMOTE_DB = 'http://admin:password@127.0.0.1:5984/ollilocation'
 
 let db = null
@@ -22,10 +24,11 @@ const initMap = () => {
 
   map.on('load', () => {
     started = false
-    initRoute([[-92.467044, 44.022365]])
     initStops()
       .then(stops => {
-        initOlli([-92.467044, 44.022365])
+        const start = stops.features[0].geometry.coordinates
+        initRoute([start])
+        initOlli(start)
         sync()
       })
   })
@@ -156,7 +159,7 @@ const initStops = () => {
         addStops(stops)
         resolve(stops)
       }, false)
-      xmlhttp.open('GET', '/data/stops.json', true)
+      xmlhttp.open('GET', STOPS, true)
       xmlhttp.send()
     })
   }
@@ -207,7 +210,7 @@ const sync = () => {
     .on('change', info => {
       // incoming changes only
       if (info.direction === 'pull' && info.change && info.change.docs) {
-        // console.log('sync.on.change', info.change.docs)
+        console.log('sync.on.change', info.change.docs)
         info.change.docs.forEach(function (doc) {
           if (doc.type === 'geo_position') {
             updateOlliLocation(doc.coordinates)
