@@ -74,6 +74,7 @@ const computeAnimationPath = (geojson) => {
 const initDriveRoute = (geojson, stops) => {
   if (map) {
     let counter = 0
+    let driving = false
 
     if (driveRouteButton) {
       map.removeLayer('olli-bus')
@@ -134,32 +135,55 @@ const initDriveRoute = (geojson, stops) => {
 
       counter = counter + 1
 
-      // request next frame of animation (if destination has not been reached)
-      if (counter < route.features[0].geometry.coordinates.length) {
-        let current = ollibus.features[0].geometry.coordinates
+      let current = ollibus.features[0].geometry.coordinates
 
-        const atStop = counter > 3 && stopCoordinates.some(stop => {
-          return stop[0] === current[0] && stop[1] === current[1]
-        })
-        if (atStop && counter > 1) {
+      const stopIndex = stopCoordinates.findIndex(stop => {
+        return stop[0] === current[0] && stop[1] === current[1]
+      })
+
+      if (stopIndex > -1) {
+        console.log('at stop:', stops.features[stopIndex])
+      }
+
+      // request next frame of animation (if destination has not been reached)
+      if (driving && counter < route.features[0].geometry.coordinates.length) {
+        if (stopIndex > -1 && counter > 3) {
           setTimeout(() => {
             requestAnimationFrame(animate)
           }, STOP_DURATION * 1000)
         } else {
           requestAnimationFrame(animate)
         }
+      } else {
+        driveRouteButton.innerText = 'Drive'
       }
     }
 
     if (!driveRouteButton) {
       driveRouteButton = document.getElementById('driveRoute')
       driveRouteButton.addEventListener('click', () => {
-        counter = 0
-        animate()
+        if (counter < route.features[0].geometry.coordinates.length) {
+          if (driveRouteButton.innerText === 'Drive') {
+            driveRouteButton.innerText = 'Stop'
+            driving = true
+            console.log('drive started:', route.features[0].geometry.coordinates[counter])
+            animate()
+          } else {
+            driving = false
+            console.log('drive stopped:', route.features[0].geometry.coordinates[counter])
+            driveRouteButton.innerText = 'Drive'
+          }
+        } else {
+          counter = 0
+          driving = true
+          console.log('drive started at ', route.features[0].geometry.coordinates[counter])
+          animate()
+        }
       })
     }
 
     driveRouteButton.style.display = 'inline-block'
+    driveRouteButton.innerText = 'Drive'
   }
 }
 
@@ -500,7 +524,7 @@ const initLayers = (geojson) => {
 
 const getCoordinates = (geojson) => {
   let coordinates = []
-  
+
   if (geojson.features[0].geometry.type === 'LineString') {
     coordinates = geojson.features[0].geometry.coordinates.map(coords => {
       return [coords[0], coords[1]]
@@ -534,7 +558,7 @@ const getOllieRoute = () => {
     let geojson = JSON.parse(this.response)
     initLayers(geojson)
   }, false)
-  xmlhttp.open('GET', 'route.2.json', true)
+  xmlhttp.open('GET', 'route.2b.json', true)
   xmlhttp.send()
 }
 
